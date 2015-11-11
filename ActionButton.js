@@ -58,6 +58,14 @@ class ActionButton extends Component {
     size: React.PropTypes.number,
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.active !== undefined) {
+      this.setState({
+        active: nextProps.active
+      }, () => this.animateButton())
+    }
+  }
+
   setPositionAndSizeByType() {
     let position, offsetX, offsetY, size;
 
