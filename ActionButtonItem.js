@@ -67,7 +67,7 @@ class ActionButtonItem extends Component {
   getTextStyles() {
     let positionStyles = {
       right: actionBtnWidth + this.state.spaceBetween,
-      top: this.state.offsetTop
+      top: this.state.offsetTop - 3
     }
 
     if (this.props.position == 'left') positionStyles = {

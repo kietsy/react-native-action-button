@@ -87,7 +87,7 @@ class ActionButton extends Component {
       position = 'right',
       offsetX  = 30,
       offsetY  = 30,
-      size     = 56;
+      size     = 64;
     }
 
     this.state.position = this.props.position || position;
@@ -156,7 +156,7 @@ class ActionButton extends Component {
     return [
       styles.actionsVertical,
       {
-        paddingHorizontal: this.state.offsetX, 
+        paddingHorizontal: 11 + this.state.offsetX,
         paddingBottom: this.state.size + this.state.offsetY,
         backgroundColor: this.state.bgColor,
         alignItems: alignItems,
