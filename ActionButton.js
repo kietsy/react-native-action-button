@@ -47,7 +47,7 @@ class ActionButton extends Component {
 
     type: React.PropTypes.string,
     position: React.PropTypes.string,
-    
+
     bgColor: React.PropTypes.string,
     buttonColor: React.PropTypes.string,
     buttonTextColor: React.PropTypes.string,
@@ -113,10 +113,10 @@ class ActionButton extends Component {
     if (this.state.position == 'right') alignItems = 'flex-end';
 
     return [
-      styles.actionsVertical, 
+      styles.actionsVertical,
       {
         paddingHorizontal: this.state.offsetX, 
-        paddingBottom: this.state.size + this.state.offsetY, 
+        paddingBottom: this.state.size + this.state.offsetY,
         backgroundColor: this.state.bgColor,
         alignItems: alignItems,
       }
@@ -185,15 +185,15 @@ class ActionButton extends Component {
 
     return (
       <Animated.View style={[styles.overlay, { opacity: this.state.anim }]}>
-        <TouchableOpacity activeOpacity={1} onPress={this.reset.bind(this)} 
+        <TouchableOpacity activeOpacity={1} onPress={this.reset.bind(this)}
           style={this.getActionsStyle()}>
           {this.state.actionButtons.map((ActionButton, iter) => {
             return (<ActionButtonItem
-            		  key = {iter} 
-                      position={this.state.position} 
-                      spacing={this.state.spacing} 
-                      anim={this.state.anim} 
-                      size={this.state.size} 
+            		  key = {iter}
+                      position={this.state.position}
+                      spacing={this.state.spacing}
+                      anim={this.state.anim}
+                      size={this.state.size}
                       {...ActionButton.props}
                       onPress={() => {
                         this.reset()

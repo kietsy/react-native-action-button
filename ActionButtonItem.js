@@ -46,11 +46,11 @@ class ActionButtonItem extends Component {
         ]
       }>
         <TouchableOpacity style={{flex:1}} onPress={this.props.onPress}>
-          <View style={[styles.actionButton, this.props.style, 
-            { 
-              width: actionBtnWidth, 
-              height: actionBtnWidth, 
-              borderRadius: actionBtnWidth/2,  
+          <View style={[styles.actionButton, this.props.style,
+            {
+              width: actionBtnWidth,
+              height: actionBtnWidth,
+              borderRadius: actionBtnWidth/2,
               backgroundColor: this.props.buttonColor || 'white'
             }
           ]}>
@@ -63,14 +63,14 @@ class ActionButtonItem extends Component {
   }
 
   getTextStyles() {
-    let positionStyles = { 
-      right: actionBtnWidth + this.state.spaceBetween, 
-      top: this.state.offsetTop 
+    let positionStyles = {
+      right: actionBtnWidth + this.state.spaceBetween,
+      top: this.state.offsetTop
     }
-    
-    if (this.props.position == 'left') positionStyles = { 
-      left: actionBtnWidth + this.state.spaceBetween, 
-      top: this.state.offsetTop 
+
+    if (this.props.position == 'left') positionStyles = {
+      left: actionBtnWidth + this.state.spaceBetween,
+      top: this.state.offsetTop
     }
 
     return [styles.actionText, positionStyles]
