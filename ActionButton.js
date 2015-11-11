@@ -22,6 +22,7 @@ class ActionButton extends Component {
     super(props);
     this.state = {
       active: this.props.active || false,
+      hide: this.props.hide || false,
       type: this.props.type || 'float', // float | tab
       bgColor: this.props.bgColor || 'transparent',
       buttonColor: this.props.buttonColor || 'rgba(0,0,0,1)',
@@ -30,6 +31,7 @@ class ActionButton extends Component {
     }
 
     this.state.anim = this.props.active ? new Animated.Value(1) : new Animated.Value(0);
+    this.state.hideAnim = this.props.hide ? new Animated.Value(1) : new Animated.Value(0);
 
     if (!props.children) throw new Error("ActionButton must have at least 1 Child.");
 
@@ -44,6 +46,7 @@ class ActionButton extends Component {
 
   propTypes: {
     active: React.PropTypes.bool,
+    hide: React.PropTypes.bool,
 
     type: React.PropTypes.string,
     position: React.PropTypes.string,
@@ -63,6 +66,12 @@ class ActionButton extends Component {
       this.setState({
         active: nextProps.active
       }, () => this.animateButton())
+    }
+
+    if (nextProps.hide !== undefined) {
+      this.setState({
+        hide: nextProps.hide
+      }, () => this.animateOffScreen())
     }
   }
 
@@ -98,8 +107,32 @@ class ActionButton extends Component {
   }
 
   getActionButtonStyles() {
-    if (this.state.active) return [styles.actionBarItem, styles.actionBarPos, this.getButtonSize(), this.getOffsetXY()]
-    return [styles.actionBarItem, this.getButtonSize()]
+    if (this.state.active) return [
+      styles.actionBarItem,
+      styles.actionBarPos,
+      this.getButtonSize(),
+      this.getOffsetXY(),
+      this.moveOffscreen()
+    ]
+
+    return [
+      styles.actionBarItem,
+      this.getButtonSize(),
+      this.moveOffscreen()
+    ]
+  }
+
+  moveOffscreen () {
+    return {
+      transform: [
+        {
+          translateY: this.state.hideAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, this.state.size + this.state.offsetY]
+          })
+        }
+      ]
+    }
   }
 
   getButtonSize() {
@@ -148,7 +181,7 @@ class ActionButton extends Component {
   _renderButton() {
     let btnSize = this.state.size / 1.2;
     return (
-      <View style={this.getActionButtonStyles()}>
+      <Animated.View style={this.getActionButtonStyles()}>
         <TouchableOpacity activeOpacity={0.8} onPress={this.animateButton.bind(this)}>
           <Animated.View 
             style={[styles.btn, {
@@ -184,7 +217,7 @@ class ActionButton extends Component {
             </Animated.Text>
           </Animated.View>
         </TouchableOpacity>
-      </View>
+      </Animated.View>
     );
   }
 
@@ -248,6 +281,30 @@ class ActionButton extends Component {
     setTimeout(() => {
       this.setState({ active: false });
     }, 450)
+  }
+
+  animateOffScreen() {
+    if (this.state.hide) {
+      Animated.timing(
+        this.state.hideAnim, {
+          toValue: 1,
+          duration: 350,
+          easing: Easing.elastic(1),
+        }
+      ).start()
+    } else {
+      this.resetOffScreen()
+    }
+  }
+
+  resetOffScreen () {
+    Animated.timing(
+      this.state.hideAnim, {
+        toValue: 0,
+        duration: 350,
+        easing: Easing.elastic(1),
+      }
+    ).start()
   }
 }
 
