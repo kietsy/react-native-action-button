@@ -198,14 +198,9 @@ class ActionButton extends Component {
                 },
               ],
             }]}>
-            <Animated.Text style={[styles.btnText, {
-              color: this.state.anim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [this.state.buttonTextColor, 'rgba(0,0,0,1)']
-              })
-            }]}>
+            <Text style={[styles.btnText, {color: this.state.buttonTextColor}]}>
               +
-            </Animated.Text>
+            </Text>
           </Animated.View>
         </TouchableOpacity>
       </Animated.View>
