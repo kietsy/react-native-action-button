@@ -188,10 +188,7 @@ class ActionButton extends Component {
               width: btnSize,
               height: btnSize,
               borderRadius: btnSize/2,
-              backgroundColor: this.state.anim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [this.state.buttonColor, 'rgba(255,255,255,1)']
-              }),
+              backgroundColor: this.state.buttonColor,
               transform: [
                 {
                   scale: this.state.anim.interpolate({
