@@ -57,7 +57,9 @@ class ActionButtonItem extends Component {
             {this.props.children}
           </View>
         </TouchableOpacity>
-        <Text style={this.getTextStyles()}>{this.props.title}</Text>
+        <TouchableOpacity style={this.getTextStyles()} onPress={this.props.onPress}>
+          <Text style={this.actionTextOnly}>{this.props.title}</Text>
+        </TouchableOpacity>
       </Animated.View>
     );
   }
@@ -87,12 +89,24 @@ var styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 2,
   },
-  actionText: {
-    color: '#fff',
+  actionTextOnly: {
+    color: '#9E9E9E',
     fontFamily: 'Avenir',
     fontSize: 14,
     fontWeight: '600',
+  },
+  actionText: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     position: 'absolute',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    shadowRadius: 0.25,
+    shadowOffset: {
+      width: 0,
+      height: 0.25,
+    },
+    shadowOpacity: 0.8,
   },
 });
 
