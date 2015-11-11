@@ -183,25 +183,32 @@ class ActionButton extends Component {
     return (
       <Animated.View style={this.getActionButtonStyles()}>
         <TouchableOpacity activeOpacity={0.8} onPress={this.animateButton.bind(this)}>
-          <Animated.View 
+          <View
             style={[styles.btn, {
               width: btnSize,
               height: btnSize,
               borderRadius: btnSize/2,
-              backgroundColor: this.state.buttonColor,
-              transform: [
-                {
-                  rotate: this.state.anim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: ['0deg', '135deg']
-                  })
-                },
-              ],
-            }]}>
-            <Text style={[styles.btnText, {color: this.state.buttonTextColor}]}>
-              +
-            </Text>
-          </Animated.View>
+            }, styles.shadow]}>
+            <Animated.View
+              style={[styles.btn, {
+                width: btnSize,
+                height: btnSize,
+                borderRadius: btnSize/2,
+                backgroundColor: this.state.buttonColor,
+                transform: [
+                  {
+                    rotate: this.state.anim.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ['0deg', '135deg']
+                    })
+                  },
+                ],
+              }]}>
+              <Text style={[styles.btnText, {color: this.state.buttonTextColor}]}>
+                +
+              </Text>
+            </Animated.View>
+          </View>
         </TouchableOpacity>
       </Animated.View>
     );
@@ -315,6 +322,14 @@ var styles = StyleSheet.create({
   btn: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  shadow: {
+    shadowRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.8,
   },
   btnText: {
     marginTop: -4,
