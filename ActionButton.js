@@ -191,12 +191,6 @@ class ActionButton extends Component {
               backgroundColor: this.state.buttonColor,
               transform: [
                 {
-                  scale: this.state.anim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [1, 1.2]
-                  }),
-                },
-                {
                   rotate: this.state.anim.interpolate({
                     inputRange: [0, 1],
                     outputRange: ['0deg', '135deg']
